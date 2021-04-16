@@ -9,7 +9,7 @@ TFA is trained in two stages. We first train the entire object detector on the d
 First train a base model. To train a base model on the first split of PASCAL VOC, run
 ```angular2html
 python3 -m tools.train_net --num-gpus 8 \
-        --config-file configs/PascalVOC-detection/split1/faster_rcnn_R_101_base1.yaml
+        --config-file configs/PascalVOC-detection/split1/faster_rcnn_R_101_FPN_base1.yaml
 ```
 
 ## Stage 2: Few-Shot Fine-Tuning
@@ -51,7 +51,7 @@ Finally, combine the base weights from the base model with the novel weights by 
 python3 -m tools.ckpt_surgery \
         --src1 checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_base1/model_final.pth \
         --src2 checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_ft_novel1_1shot/model_final.pth \
-        --method combine \
+        --method combine --coco \
         --save-dir checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_all1
 ```
 The resulting weights will be saved to `checkpoints/voc/faster_rcnn/faster_rcnn_R_101_FPN_all1/model_reset_combine.pth`.
