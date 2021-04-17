@@ -27,6 +27,8 @@ datasets/VOC2012
 datasets/vocsplit
 datasets/lvis
 datasets/lvissplit
+datasets/ChuquiSouth
+datasets/chuquisplit
 datasets/*/seed*
 
 # configs

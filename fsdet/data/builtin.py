@@ -119,6 +119,41 @@ def register_all_coco(root="datasets"):
         )
 
 
+def register_all_chuqui(root="datasets"):
+    # dataset name (get matched to config.yaml:DATASETS.TRAIN & TEST),
+    # images directory
+    # COCO annotations
+    METASPLITS = [
+        (
+            "chuqui_trainval_all",
+            "ChuquiSouth/images_tiled",
+            "chuquisplit/datasplit/trainval.json",
+        ),
+        (
+            "chuqui_trainval_base",
+            "ChuquiSouth/images_tiled",
+            "chuquisplit/datasplit/trainval.json",
+        ),
+        ("chuqui_test_all", "ChuquiSouth/images_tiled", "chuquisplit/datasplit/test.json"),
+        ("chuqui_test_base", "ChuquiSouth/images_tiled", "chuquisplit/datasplit/test.json"),
+        ("chuqui_test_novel", "ChuquiSouth/images_tiled", "chuquisplit/datasplit/test.json"),
+    ]
+
+    # register small meta datasets for fine-tuning stage
+    for prefix in ["all", "novel"]:
+        for shot in [1, 2, 5, 10]:
+            name = "chuqui_trainval_{}_{}shot".format(prefix, shot)
+            METASPLITS.append((name, "ChuquiSouth/images_tiled", ""))
+
+    for name, imgdir, annofile in METASPLITS:
+        register_meta_coco(
+            name,
+            _get_builtin_metadata("chuqui_fewshot"),
+            os.path.join(root, imgdir),
+            os.path.join(root, annofile),
+            split_dir=os.path.join("datasets", "chuquisplit")
+        )
+
 # ==== Predefined datasets and splits for LVIS ==========
 
 _PREDEFINED_SPLITS_LVIS = {
@@ -271,3 +306,4 @@ def register_all_pascal_voc(root="datasets"):
 register_all_coco()
 register_all_lvis()
 register_all_pascal_voc()
+register_all_chuqui()

@@ -245,6 +245,56 @@ COCO_NOVEL_CATEGORIES = [
     {"color": [183, 130, 88], "isthing": 1, "id": 72, "name": "tv"},
 ]
 
+# Chuqui COCO categories
+# there is a tight dependency between this list and the COCO json file via
+# https://github.com/ucbdrive/few-shot-object-detection/blob/v0.2.1.1/fsdet/evaluation/coco_evaluation.py#L242
+# specifically, precisions.shape is determined by the length of "categories" in
+# the COCO json file (as loaded at
+# https://github.com/ucbdrive/few-shot-object-detection/blob/v0.2.1.1/fsdet/evaluation/coco_evaluation.py#L71
+# and passed to pycocotools.cocoeval.COCOeval), and class_names (as determined by
+# filtering this list to the things)
+CHUQUI_CATEGORIES = [
+    {"color": [11, 131, 35], "isthing": 1, "id": 1, "name": "Engineering Vehicle"},
+    {"color": [199, 93, 35], "isthing": 1, "id": 3, "name": "Engineering Vehicle:Blasthole Drill"},
+    {"color": [152, 201, 97], "isthing": 1, "id": 5, "name": "Engineering Vehicle:Crane Truck"},
+    {"color": [69, 19, 197], "isthing": 1, "id": 8, "name": "Engineering Vehicle:Face Shovel"},
+    {"color": [248, 207, 153], "isthing": 1, "id": 10, "name": "Engineering Vehicle:Ground Grader"},
+    {"color": [144, 76, 160], "isthing": 1, "id": 12, "name": "Engineering Vehicle:Large Dozer"},
+    {"color": [217, 0, 247], "isthing": 1, "id": 13, "name": "Engineering Vehicle:Large Excavator"},
+    {"color": [202, 252, 130], "isthing": 1, "id": 14, "name": "Engineering Vehicle:Large Haul Truck"},
+    {"color": [27, 17, 7], "isthing": 1, "id": 15, "name": "Engineering Vehicle:Large Loader"},
+    {"color": [75, 251, 74], "isthing": 1, "id": 16, "name": "Engineering Vehicle:Long Reach Drill"},
+    {"color": [144, 98, 164], "isthing": 1, "id": 19, "name": "Engineering Vehicle:Rope Shovel"},
+    {"color": [194, 202, 160], "isthing": 1, "id": 21, "name": "Engineering Vehicle:Small Dozer"},
+    {"color": [13, 239, 117], "isthing": 1, "id": 22, "name": "Engineering Vehicle:Small Excavator"},
+    {"color": [181, 118, 170], "isthing": 1, "id": 23, "name": "Engineering Vehicle:Small Haul Truck"},
+    {"color": [24, 119, 60], "isthing": 1, "id": 24, "name": "Engineering Vehicle:Small Loader"},
+    {"color": [103, 37, 100], "isthing": 1, "id": 27, "name": "Engineering Vehicle:Water Truck"},
+    {"color": [133, 96, 196], "isthing": 1, "id": 33, "name": "Passenger Vehicle"},
+    {"color": [167, 170, 236], "isthing": 1, "id": 34, "name": "Passenger Vehicle:Bus"},
+    {"color": [20, 254, 164], "isthing": 1, "id": 36, "name": "Passenger Vehicle:Pickup Truck"},
+    {"color": [121, 131, 224], "isthing": 1, "id": 38, "name": "Passenger Vehicle:Sedan"},
+    {"color": [105, 42, 96], "isthing": 1, "id": 40, "name": "Passenger Vehicle:Van"},
+    {"color": [39, 127, 14], "isthing": 1, "id": 42, "name": "Truck"},
+    {"color": [20, 225, 180], "isthing": 1, "id": 43, "name": "Truck:Box Truck"},
+    {"color": [155, 129, 141], "isthing": 1, "id": 46, "name": "Truck:Flatbed Truck"},
+    {"color": [41, 237, 1], "isthing": 1, "id": 49, "name": "Truck:Tanker Truck"},
+    {"color": [184, 240, 72], "isthing": 1, "id": 50, "name": "Truck:Tow Truck"},
+    {"color": [69, 108, 10], "isthing": 1, "id": 52, "name": "Truck:Truck Tractor with Box Trailer"},
+    {"color": [139, 53, 126], "isthing": 1, "id": 53, "name": "Truck:Truck Tractor with Flatbed Trailer"},
+    {"color": [185, 82, 186], "isthing": 1, "id": 54, "name": "Truck:Truck Tractor with Liquid Tank"},
+    {"color": [172, 24, 155], "isthing": 1, "id": 56, "name": "Truck:Utility Truck"},
+]
+
+# Novel Chuqui COCO categories
+CHUQUI_NOVEL_CATEGORIES = [
+    {"color": [202, 252, 130], "isthing": 1, "id": 14, "name": "Engineering Vehicle:Large Haul Truck"},
+    {"color": [27, 17, 7], "isthing": 1, "id": 15, "name": "Engineering Vehicle:Large Loader"},
+    {"color": [133, 96, 196], "isthing": 1, "id": 33, "name": "Passenger Vehicle"},
+    {"color": [155, 129, 141], "isthing": 1, "id": 46, "name": "Truck:Flatbed Truck"},
+    {"color": [185, 82, 186], "isthing": 1, "id": 54, "name": "Truck:Truck Tractor with Liquid Tank"},
+]
+
 # PASCAL VOC categories
 PASCAL_VOC_ALL_CATEGORIES = {
     1: [
@@ -376,13 +426,13 @@ PASCAL_VOC_BASE_CATEGORIES = {
 }
 
 
-def _get_coco_instances_meta():
-    thing_ids = [k["id"] for k in COCO_CATEGORIES if k["isthing"] == 1]
-    thing_colors = [k["color"] for k in COCO_CATEGORIES if k["isthing"] == 1]
-    assert len(thing_ids) == 80, len(thing_ids)
+def _get_coco_instances_meta(categories, nthings):
+    thing_ids = [k["id"] for k in categories if k["isthing"] == 1]
+    thing_colors = [k["color"] for k in categories if k["isthing"] == 1]
+    assert len(thing_ids) == nthings
     # Mapping from the incontiguous COCO category id to an id in [0, 79]
     thing_dataset_id_to_contiguous_id = {k: i for i, k in enumerate(thing_ids)}
-    thing_classes = [k["name"] for k in COCO_CATEGORIES if k["isthing"] == 1]
+    thing_classes = [k["name"] for k in categories if k["isthing"] == 1]
     ret = {
         "thing_dataset_id_to_contiguous_id": thing_dataset_id_to_contiguous_id,
         "thing_classes": thing_classes,
@@ -391,16 +441,23 @@ def _get_coco_instances_meta():
     return ret
 
 
-def _get_coco_fewshot_instances_meta():
-    ret = _get_coco_instances_meta()
-    novel_ids = [k["id"] for k in COCO_NOVEL_CATEGORIES if k["isthing"] == 1]
+def _get_coco_fewshot_instances_meta(categories=None, novel_categories=None, nthings=None):
+    assert (categories is None) == (novel_categories is None) and \
+           (categories is None) == (nthings is None)  # all are set together
+    if categories is None:
+        categories = COCO_CATEGORIES
+        novel_categories = COCO_NOVEL_CATEGORIES
+        nthings = 80
+
+    ret = _get_coco_instances_meta(categories=categories, nthings=nthings)
+    novel_ids = [k["id"] for k in novel_categories if k["isthing"] == 1]
     novel_dataset_id_to_contiguous_id = {k: i for i, k in enumerate(novel_ids)}
     novel_classes = [
-        k["name"] for k in COCO_NOVEL_CATEGORIES if k["isthing"] == 1
+        k["name"] for k in novel_categories if k["isthing"] == 1
     ]
     base_categories = [
         k
-        for k in COCO_CATEGORIES
+        for k in categories
         if k["isthing"] == 1 and k["name"] not in novel_classes
     ]
     base_ids = [k["id"] for k in base_categories]
@@ -460,6 +517,9 @@ def _get_builtin_metadata(dataset_name):
         return _get_coco_instances_meta()
     elif dataset_name == "coco_fewshot":
         return _get_coco_fewshot_instances_meta()
+    elif dataset_name == "chuqui_fewshot":
+        return _get_coco_fewshot_instances_meta(categories=CHUQUI_CATEGORIES,
+                novel_categories=CHUQUI_NOVEL_CATEGORIES, nthings=30)
     elif dataset_name == "lvis_v0.5":
         return _get_lvis_instances_meta_v0_5()
     elif dataset_name == "lvis_v0.5_fewshot":

@@ -3,6 +3,8 @@ import torch
 import argparse
 import os
 
+from fsdet.data.builtin_meta import (COCO_CATEGORIES, COCO_NOVEL_CATEGORIES,
+        CHUQUI_CATEGORIES, CHUQUI_NOVEL_CATEGORIES)
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -31,6 +33,8 @@ def parse_args():
     # Dataset
     parser.add_argument('--coco', action='store_true',
                         help='For COCO models')
+    parser.add_argument('--chuqui-coco', action='store_true',
+                        help='For Chuqui COCO models')
     parser.add_argument('--lvis', action='store_true',
                         help='For LVIS models')
     args = parser.parse_args()
@@ -183,21 +187,21 @@ if __name__ == '__main__':
     args = parse_args()
 
     # COCO
-    if args.coco:
+    if args.coco or args.chuqui_coco:
+        if args.coco:
+            categories = COCO_CATEGORIES
+            novel_categories = COCO_NOVEL_CATEGORIES
+            TAR_SIZE = 80
+        else:
+            args.coco = True
+            categories = CHUQUI_CATEGORIES
+            novel_categories = CHUQUI_NOVEL_CATEGORIES
+            TAR_SIZE = 30
         # COCO
-        NOVEL_CLASSES = [
-            1, 2, 3, 4, 5, 6, 7, 9, 16, 17, 18, 19, 20, 21, 44, 62, 63, 64, 67,
-            72,
-        ]
-        BASE_CLASSES = [
-            8, 10, 11, 13, 14, 15, 22, 23, 24, 25, 27, 28, 31, 32, 33, 34, 35,
-            36, 37, 38, 39, 40, 41, 42, 43, 46, 47, 48, 49, 50, 51, 52, 53, 54,
-            55, 56, 57, 58, 59, 60, 61, 65, 70, 73, 74, 75, 76, 77, 78, 79, 80,
-            81, 82, 84, 85, 86, 87, 88, 89, 90,
-        ]
+        NOVEL_CLASSES = [x["id"] for x in novel_categories if x["isthing"]]
+        BASE_CLASSES = list(set([x["id"] for x in categories if x["isthing"]]).difference(NOVEL_CLASSES))
         ALL_CLASSES = sorted(BASE_CLASSES + NOVEL_CLASSES)
         IDMAP = {v:i for i, v in enumerate(ALL_CLASSES)}
-        TAR_SIZE = 80
     elif args.lvis:
         # LVIS
         NOVEL_CLASSES = [

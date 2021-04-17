@@ -16,7 +16,7 @@ This file contains functions to parse COCO-format annotations into dicts in "Det
 __all__ = ["register_meta_coco"]
 
 
-def load_coco_json(json_file, image_root, metadata, dataset_name):
+def load_coco_json(json_file, image_root, metadata, dataset_name, split_dir=None):
     """
     Load a json file with COCO's instances annotation format.
     Currently supports instance detection.
@@ -37,7 +37,8 @@ def load_coco_json(json_file, image_root, metadata, dataset_name):
     is_shots = "shot" in dataset_name
     if is_shots:
         fileids = {}
-        split_dir = os.path.join("datasets", "cocosplit")
+        if split_dir is None:
+            split_dir = os.path.join("datasets", "cocosplit")
         if "seed" in dataset_name:
             shot = dataset_name.split("_")[-2].split("shot")[0]
             seed = int(dataset_name.split("_seed")[-1])
@@ -121,10 +122,10 @@ def load_coco_json(json_file, image_root, metadata, dataset_name):
     return dataset_dicts
 
 
-def register_meta_coco(name, metadata, imgdir, annofile):
+def register_meta_coco(name, metadata, imgdir, annofile, split_dir=None):
     DatasetCatalog.register(
         name,
-        lambda: load_coco_json(annofile, imgdir, metadata, name),
+        lambda: load_coco_json(annofile, imgdir, metadata, name, split_dir=split_dir),
     )
 
     if "_base" in name or "_novel" in name:
