@@ -10,6 +10,7 @@ import argparse
 import json
 import os
 from collections import defaultdict
+import fsdet.data
 from detectron2.data import DatasetCatalog, MetadataCatalog
 from detectron2.structures import Boxes, BoxMode, Instances
 from detectron2.utils.logger import setup_logger

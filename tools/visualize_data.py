@@ -4,7 +4,8 @@ from PIL import Image
 
 import argparse
 import os
-from detectron2.config import get_cfg
+import fsdet.data
+from fsdet.config import get_cfg
 from detectron2.data import DatasetCatalog, MetadataCatalog, build_detection_train_loader
 from detectron2.data import detection_utils as utils
 from detectron2.utils.logger import setup_logger
