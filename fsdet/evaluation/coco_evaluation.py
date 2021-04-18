@@ -20,6 +20,8 @@ from detectron2.structures import BoxMode
 from detectron2.utils.logger import create_small_table
 
 from fsdet.evaluation.evaluator import DatasetEvaluator
+from fsdet.data.builtin_meta import (COCO_CATEGORIES, COCO_NOVEL_CATEGORIES, \
+        CHUQUI_CATEGORIES, CHUQUI_NOVEL_CATEGORIES)
 
 
 class COCOEvaluator(DatasetEvaluator):
@@ -57,14 +59,17 @@ class COCOEvaluator(DatasetEvaluator):
             self._metadata.json_file = cache_path
         self._is_splits = "all" in dataset_name or "base" in dataset_name \
             or "novel" in dataset_name
-        self._base_classes = [
-            8, 10, 11, 13, 14, 15, 22, 23, 24, 25, 27, 28, 31, 32, 33, 34, 35,
-            36, 37, 38, 39, 40, 41, 42, 43, 46, 47, 48, 49, 50, 51, 52, 53, 54,
-            55, 56, 57, 58, 59, 60, 61, 65, 70, 73, 74, 75, 76, 77, 78, 79, 80,
-            81, 82, 84, 85, 86, 87, 88, 89, 90,
-        ]
-        self._novel_classes = [1, 2, 3, 4, 5, 6, 7, 9, 16, 17, 18, 19, 20, 21,
-                               44, 62, 63, 64, 67, 72]
+        if 'coco' in dataset_name:
+            categories = COCO_CATEGORIES
+            novel_categories = COCO_NOVEL_CATEGORIES
+        elif 'chuqui' in dataset_name:
+            categories = CHUQUI_CATEGORIES
+            novel_categories = CHUQUI_NOVEL_CATEGORIES
+        else:
+            assert False, 'Unknown dataset'
+
+        self._novel_classes = [x["id"] for x in novel_categories if x["isthing"]]
+        self._base_classes = list(set([x["id"] for x in categories if x["isthing"]]).difference(self._novel_classes))
 
         json_file = PathManager.get_local_path(self._metadata.json_file)
         with contextlib.redirect_stdout(io.StringIO()):
