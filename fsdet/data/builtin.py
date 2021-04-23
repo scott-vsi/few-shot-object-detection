@@ -166,6 +166,54 @@ def register_all_chuqui(root="datasets"):
             split_dir=os.path.join("datasets", "chuquisplit")
         )
 
+
+def register_all_kalgoorlie(root="datasets"):
+    # dataset name (gets matched to config.yaml:DATASETS.TRAIN & TEST),
+    # images directory,
+    # COCO annotations
+    METASPLITS = [
+        (
+            "kalgoorlie_trainval_all",
+            "Kalgoorlie_2019/images_tiled",
+            "kalgoorliesplit/datasplit/trainval.json",
+        ),
+        (
+            "kalgoorlie_trainval_base",
+            "Kalgoorlie_2019/images_tiled",
+            "kalgoorliesplit/datasplit/trainval.json",
+        ),
+        (
+            "kalgoorlie_test_all",
+            "Kalgoorlie_2019/images_tiled",
+            "kalgoorliesplit/datasplit/test.json"
+        ),
+        (
+            "kalgoorlie_test_base",
+            "Kalgoorlie_2019/images_tiled",
+            "kalgoorliesplit/datasplit/test.json"
+        ),
+        (
+            "kalgoorlie_test_novel",
+            "Kalgoorlie_2019/images_tiled",
+            "kalgoorliesplit/datasplit/test.json"
+        ),
+    ]
+
+    # register small meta datasets for fine-tuning stage
+    for prefix in ["all", "novel"]:
+        for shot in [1, 2, 5, 10]:
+            name = "kalgoorlie_trainval_{}_{}shot".format(prefix, shot)
+            METASPLITS.append((name, "Kalgoorlie_2019/images_tiled", ""))
+
+    for name, imgdir, annofile in METASPLITS:
+        register_meta_coco(
+            name,
+            _get_builtin_metadata("kalgoorlie_fewshot"),
+            os.path.join(root, imgdir),
+            os.path.join(root, annofile),
+            split_dir=os.path.join("datasets", "kalgoorliesplit")
+        )
+
 # ==== Predefined datasets and splits for LVIS ==========
 
 _PREDEFINED_SPLITS_LVIS = {
@@ -319,3 +367,4 @@ register_all_coco()
 register_all_lvis()
 register_all_pascal_voc()
 register_all_chuqui()
+register_all_kalgoorlie()

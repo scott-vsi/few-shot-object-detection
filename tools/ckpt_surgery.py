@@ -4,7 +4,8 @@ import argparse
 import os
 
 from fsdet.data.builtin_meta import (COCO_CATEGORIES, COCO_NOVEL_CATEGORIES,
-        CHUQUI_CATEGORIES, CHUQUI_NOVEL_CATEGORIES)
+        CHUQUI_CATEGORIES, CHUQUI_NOVEL_CATEGORIES,
+        KALGOORLIE_CATEGORIES, KALGOORLIE_NOVEL_CATEGORIES)
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -196,6 +197,11 @@ if __name__ == '__main__':
             args.coco = True
             categories = CHUQUI_CATEGORIES
             novel_categories = CHUQUI_NOVEL_CATEGORIES
+            TAR_SIZE = 30
+        elif args.dataset_name.lower() == 'kalgoorlie':
+            args.coco = True
+            categories = KALGOORLIE_CATEGORIES
+            novel_categories = KALGOORLIE_NOVEL_CATEGORIES
             TAR_SIZE = 30
         else:
             assert False, 'Unknown dataset'

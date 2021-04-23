@@ -29,6 +29,8 @@ datasets/lvis
 datasets/lvissplit
 datasets/ChuquiSouth
 datasets/chuquisplit
+datasets/Kalgoorlie_2019
+datasets/kalgoorliesplit
 datasets/*/seed*
 
 # configs

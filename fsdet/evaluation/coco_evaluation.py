@@ -21,7 +21,8 @@ from detectron2.utils.logger import create_small_table
 
 from fsdet.evaluation.evaluator import DatasetEvaluator
 from fsdet.data.builtin_meta import (COCO_CATEGORIES, COCO_NOVEL_CATEGORIES, \
-        CHUQUI_CATEGORIES, CHUQUI_NOVEL_CATEGORIES)
+        CHUQUI_CATEGORIES, CHUQUI_NOVEL_CATEGORIES,
+        KALGOORLIE_CATEGORIES, KALGOORLIE_NOVEL_CATEGORIES)
 
 
 class COCOEvaluator(DatasetEvaluator):
@@ -65,6 +66,9 @@ class COCOEvaluator(DatasetEvaluator):
         elif 'chuqui' in dataset_name:
             categories = CHUQUI_CATEGORIES
             novel_categories = CHUQUI_NOVEL_CATEGORIES
+        elif 'kalgoorlie' in dataset_name:
+            categories = KALGOORLIE_CATEGORIES
+            novel_categories = KALGOORLIE_NOVEL_CATEGORIES
         else:
             assert False, 'Unknown dataset'
 
