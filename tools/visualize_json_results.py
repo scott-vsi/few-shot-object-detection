@@ -17,11 +17,16 @@ from detectron2.utils.logger import setup_logger
 from detectron2.utils.visualizer import Visualizer
 
 
+class NoPredictionsAboveThresholdError(Exception):
+    pass
+
 def create_instances(predictions, image_size):
     ret = Instances(image_size)
 
     score = np.asarray([x["score"] for x in predictions])
     chosen = (score > args.conf_threshold).nonzero()[0]
+    if len(chosen) == 0:
+        raise NoPredictionsAboveThresholdError
     score = score[chosen]
     bbox = np.asarray([predictions[i]["bbox"] for i in chosen])
     bbox = BoxMode.convert(bbox, BoxMode.XYWH_ABS, BoxMode.XYXY_ABS)
@@ -91,11 +96,15 @@ if __name__ == "__main__":
         img = cv2.imread(dic["file_name"], cv2.IMREAD_COLOR)[:, :, ::-1]
         basename = os.path.basename(dic["file_name"])
 
-        predictions = create_instances(
-            pred_by_image[dic["image_id"]], img.shape[:2]
-        )
-        vis = Visualizer(img, metadata)
-        vis_pred = vis.draw_instance_predictions(predictions).get_image()
+        try:
+            predictions = create_instances(
+                pred_by_image[dic["image_id"]], img.shape[:2]
+            )
+            vis = Visualizer(img, metadata)
+            vis_pred = vis.draw_instance_predictions(predictions).get_image()
+        except NoPredictionsAboveThresholdError:
+            vis_pred = img.copy()
+            #print(f"No predictions above threshold for {dic['file_name']}")
 
         vis = Visualizer(img, metadata)
         vis_gt = vis.draw_dataset_dict(dic).get_image()
