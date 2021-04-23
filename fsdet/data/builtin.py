@@ -120,8 +120,8 @@ def register_all_coco(root="datasets"):
 
 
 def register_all_chuqui(root="datasets"):
-    # dataset name (get matched to config.yaml:DATASETS.TRAIN & TEST),
-    # images directory
+    # dataset name (gets matched to config.yaml:DATASETS.TRAIN & TEST),
+    # images directory,
     # COCO annotations
     METASPLITS = [
         (
@@ -134,9 +134,21 @@ def register_all_chuqui(root="datasets"):
             "ChuquiSouth/images_tiled",
             "chuquisplit/datasplit/trainval.json",
         ),
-        ("chuqui_test_all", "ChuquiSouth/images_tiled", "chuquisplit/datasplit/test.json"),
-        ("chuqui_test_base", "ChuquiSouth/images_tiled", "chuquisplit/datasplit/test.json"),
-        ("chuqui_test_novel", "ChuquiSouth/images_tiled", "chuquisplit/datasplit/test.json"),
+        (
+            "chuqui_test_all",
+            "ChuquiSouth/images_tiled",
+            "chuquisplit/datasplit/test.json"
+        ),
+        (
+            "chuqui_test_base",
+            "ChuquiSouth/images_tiled",
+            "chuquisplit/datasplit/test.json"
+        ),
+        (
+            "chuqui_test_novel",
+            "ChuquiSouth/images_tiled",
+            "chuquisplit/datasplit/test.json"
+        ),
     ]
 
     # register small meta datasets for fine-tuning stage

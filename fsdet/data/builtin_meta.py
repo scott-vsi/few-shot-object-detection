@@ -251,8 +251,10 @@ COCO_NOVEL_CATEGORIES = [
 # specifically, precisions.shape is determined by the length of "categories" in
 # the COCO json file (as loaded at
 # https://github.com/ucbdrive/few-shot-object-detection/blob/v0.2.1.1/fsdet/evaluation/coco_evaluation.py#L71
-# and passed to pycocotools.cocoeval.COCOeval), and class_names (as determined by
-# filtering this list to the things)
+# and passed to pycocotools.cocoeval.COCOeval), and class_names is determined
+# by filtering this list to the things
+# see also https://github.com/ucbdrive/few-shot-object-detection/issues/90 for
+# an overview of how the all (things), base and novel datasets are generated
 CHUQUI_CATEGORIES = [
     {"color": [11, 131, 35], "isthing": 1, "id": 1, "name": "Engineering Vehicle"},
     {"color": [199, 93, 35], "isthing": 1, "id": 3, "name": "Engineering Vehicle:Blasthole Drill"},

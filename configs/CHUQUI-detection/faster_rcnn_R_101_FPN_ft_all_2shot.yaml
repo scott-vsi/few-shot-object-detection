@@ -18,8 +18,9 @@ DATASETS:
 SOLVER:
   IMS_PER_BATCH: 16
   BASE_LR: 0.001
-  STEPS: (28800,)
-  MAX_ITER: 32000
+  STEPS: (10800,)
+  # Both COCO and VOC run for 3200 epochs...
+  MAX_ITER: 12000
   CHECKPOINT_PERIOD: 1000
   WARMUP_ITERS: 10
 OUTPUT_DIR: "checkpoints/chuqui/faster_rcnn/faster_rcnn_R_101_FPN_ft_all_2shot"

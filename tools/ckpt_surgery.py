@@ -33,8 +33,8 @@ def parse_args():
     # Dataset
     parser.add_argument('--coco', action='store_true',
                         help='For COCO models')
-    parser.add_argument('--chuqui-coco', action='store_true',
-                        help='For Chuqui COCO models')
+    parser.add_argument('--dataset-name', type=str, default='coco',
+                        help='Name of the dataset')
     parser.add_argument('--lvis', action='store_true',
                         help='For LVIS models')
     args = parser.parse_args()
@@ -187,16 +187,18 @@ if __name__ == '__main__':
     args = parse_args()
 
     # COCO
-    if args.coco or args.chuqui_coco:
-        if args.coco:
+    if args.coco:
+        if args.dataset_name.lower() == 'coco':
             categories = COCO_CATEGORIES
             novel_categories = COCO_NOVEL_CATEGORIES
             TAR_SIZE = 80
-        else:
+        elif args.dataset_name.lower() == 'chuqui':
             args.coco = True
             categories = CHUQUI_CATEGORIES
             novel_categories = CHUQUI_NOVEL_CATEGORIES
             TAR_SIZE = 30
+        else:
+            assert False, 'Unknown dataset'
         # COCO
         NOVEL_CLASSES = [x["id"] for x in novel_categories if x["isthing"]]
         BASE_CLASSES = list(set([x["id"] for x in categories if x["isthing"]]).difference(NOVEL_CLASSES))
