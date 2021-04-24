@@ -299,44 +299,41 @@ CHUQUI_NOVEL_CATEGORIES = [
 
 # REVIEW use the same set of categories as chuqui
 KALGOORLIE_CATEGORIES = [
-    {"color": [190, 221, 155], "isthing": 1, "id": 1, "name": "Engineering Vehicle"},
-    {"color": [53, 116, 75], "isthing": 1, "id": 5, "name": "Engineering Vehicle:Crane Truck"},
-    {"color": [78, 159, 82], "isthing": 1, "id": 6, "name": "Engineering Vehicle:Drill Jumbo"},
-    {"color": [141, 89, 139], "isthing": 1, "id": 7, "name": "Engineering Vehicle:Dump Truck"},
-    {"color": [193, 23, 177], "isthing": 1, "id": 10, "name": "Engineering Vehicle:Ground Grader"},
-    {"color": [161, 79, 135], "isthing": 1, "id": 11, "name": "Engineering Vehicle:Large Cherry Picker"},
-    {"color": [179, 153, 221], "isthing": 1, "id": 12, "name": "Engineering Vehicle:Large Dozer"},
-    {"color": [56, 101, 224], "isthing": 1, "id": 13, "name": "Engineering Vehicle:Large Excavator"},
-    {"color": [68, 160, 113], "isthing": 1, "id": 14, "name": "Engineering Vehicle:Large Haul Truck"},
-    {"color": [78, 99, 48], "isthing": 1, "id": 15, "name": "Engineering Vehicle:Large Loader"},
-    {"color": [171, 154, 64], "isthing": 1, "id": 17, "name": "Engineering Vehicle:Low Haul Truck"},
-    {"color": [27, 175, 133], "isthing": 1, "id": 20, "name": "Engineering Vehicle:Small Cherry Picker"},
-    {"color": [140, 97, 127], "isthing": 1, "id": 21, "name": "Engineering Vehicle:Small Dozer"},
-    {"color": [83, 198, 126], "isthing": 1, "id": 22, "name": "Engineering Vehicle:Small Excavator"},
-    {"color": [132, 74, 79], "isthing": 1, "id": 23, "name": "Engineering Vehicle:Small Haul Truck"},
-    {"color": [214, 104, 8], "isthing": 1, "id": 24, "name": "Engineering Vehicle:Small Loader"},
-    {"color": [34, 77, 16], "isthing": 1, "id": 27, "name": "Engineering Vehicle:Water Truck"},
-    {"color": [221, 39, 40], "isthing": 1, "id": 33, "name": "Passenger Vehicle"},
-    {"color": [202, 45, 206], "isthing": 1, "id": 34, "name": "Passenger Vehicle:Bus"},
-    {"color": [28, 245, 180], "isthing": 1, "id": 35, "name": "Passenger Vehicle:Motorcycle"},
-    {"color": [73, 220, 60], "isthing": 1, "id": 36, "name": "Passenger Vehicle:Pickup Truck"},
-    {"color": [88, 246, 253], "isthing": 1, "id": 38, "name": "Passenger Vehicle:Sedan"},
-    {"color": [189, 239, 177], "isthing": 1, "id": 39, "name": "Passenger Vehicle:SUV"},
-    {"color": [162, 178, 126], "isthing": 1, "id": 40, "name": "Passenger Vehicle:Van"},
-    {"color": [192, 53, 58], "isthing": 1, "id": 42, "name": "Truck"},
-    {"color": [75, 134, 193], "isthing": 1, "id": 43, "name": "Truck:Box Truck"},
-    {"color": [236, 18, 81], "isthing": 1, "id": 46, "name": "Truck:Flatbed Truck"},
-    {"color": [27, 19, 6], "isthing": 1, "id": 52, "name": "Truck:Truck Tractor with Box Trailer"},
-    {"color": [161, 160, 50], "isthing": 1, "id": 53, "name": "Truck:Truck Tractor with Flatbed Trailer"},
-    {"color": [234, 0, 211], "isthing": 1, "id": 56, "name": "Truck:Utility Truck"},
+    {"color": [5, 93, 40], "isthing": 1, "id": 5, "name": "Engineering Vehicle:Crane Truck"},
+    {"color": [211, 221, 20], "isthing": 1, "id": 6, "name": "Engineering Vehicle:Drill Jumbo"},
+    {"color": [245, 81, 155], "isthing": 1, "id": 7, "name": "Engineering Vehicle:Dump Truck"},
+    {"color": [39, 54, 109], "isthing": 1, "id": 10, "name": "Engineering Vehicle:Ground Grader"},
+    {"color": [167, 62, 178], "isthing": 1, "id": 11, "name": "Engineering Vehicle:Large Cherry Picker"},
+    {"color": [130, 5, 104], "isthing": 1, "id": 12, "name": "Engineering Vehicle:Large Dozer"},
+    {"color": [90, 177, 45], "isthing": 1, "id": 13, "name": "Engineering Vehicle:Large Excavator"},
+    {"color": [131, 237, 189], "isthing": 1, "id": 14, "name": "Engineering Vehicle:Large Haul Truck"},
+    {"color": [68, 147, 31], "isthing": 1, "id": 15, "name": "Engineering Vehicle:Large Loader"},
+    {"color": [145, 242, 157], "isthing": 1, "id": 17, "name": "Engineering Vehicle:Low Haul Truck"},
+    {"color": [29, 64, 102], "isthing": 1, "id": 20, "name": "Engineering Vehicle:Small Cherry Picker"},
+    {"color": [222, 31, 3], "isthing": 1, "id": 21, "name": "Engineering Vehicle:Small Dozer"},
+    {"color": [207, 192, 160], "isthing": 1, "id": 22, "name": "Engineering Vehicle:Small Excavator"},
+    {"color": [233, 71, 16], "isthing": 1, "id": 23, "name": "Engineering Vehicle:Small Haul Truck"},
+    {"color": [177, 179, 146], "isthing": 1, "id": 24, "name": "Engineering Vehicle:Small Loader"},
+    {"color": [176, 177, 128], "isthing": 1, "id": 27, "name": "Engineering Vehicle:Water Truck"},
+    {"color": [28, 84, 222], "isthing": 1, "id": 34, "name": "Passenger Vehicle:Bus"},
+    {"color": [230, 182, 146], "isthing": 1, "id": 35, "name": "Passenger Vehicle:Motorcycle"},
+    {"color": [145, 17, 58], "isthing": 1, "id": 36, "name": "Passenger Vehicle:Pickup Truck"},
+    {"color": [93, 76, 58], "isthing": 1, "id": 38, "name": "Passenger Vehicle:Sedan"},
+    {"color": [254, 29, 142], "isthing": 1, "id": 39, "name": "Passenger Vehicle:SUV"},
+    {"color": [173, 163, 39], "isthing": 1, "id": 40, "name": "Passenger Vehicle:Van"},
+    {"color": [232, 174, 67], "isthing": 1, "id": 43, "name": "Truck:Box Truck"},
+    {"color": [197, 89, 29], "isthing": 1, "id": 46, "name": "Truck:Flatbed Truck"},
+    {"color": [146, 116, 165], "isthing": 1, "id": 52, "name": "Truck:Truck Tractor with Box Trailer"},
+    {"color": [105, 83, 143], "isthing": 1, "id": 53, "name": "Truck:Truck Tractor with Flatbed Trailer"},
+    {"color": [105, 187, 183], "isthing": 1, "id": 56, "name": "Truck:Utility Truck"},
 ]
 
 KALGOORLIE_NOVEL_CATEGORIES = [
-    {"color": [141, 89, 139], "isthing": 1, "id": 7, "name": "Engineering Vehicle:Dump Truck"},
-    {"color": [68, 160, 113], "isthing": 1, "id": 14, "name": "Engineering Vehicle:Large Haul Truck"},
-    {"color": [171, 154, 64], "isthing": 1, "id": 17, "name": "Engineering Vehicle:Low Haul Truck"},
-    {"color": [214, 104, 8], "isthing": 1, "id": 24, "name": "Engineering Vehicle:Small Loader"},
-    {"color": [73, 220, 60], "isthing": 1, "id": 36, "name": "Passenger Vehicle:Pickup Truck"},
+    {"color": [90, 177, 45], "isthing": 1, "id": 13, "name": "Engineering Vehicle:Large Excavator"},
+    {"color": [225, 229, 49], "isthing": 1, "id": 14, "name": "Engineering Vehicle:Large Haul Truck"},
+    {"color": [177, 179, 146], "isthing": 1, "id": 24, "name": "Engineering Vehicle:Small Loader"},
+    {"color": [232, 174, 67], "isthing": 1, "id": 43, "name": "Truck:Box Truck"},
+    {"color": [146, 116, 165], "isthing": 1, "id": 52, "name": "Truck:Truck Tractor with Box Trailer"},
 ]
 
 # PASCAL VOC categories
@@ -566,7 +563,7 @@ def _get_builtin_metadata(dataset_name):
                 novel_categories=CHUQUI_NOVEL_CATEGORIES, nthings=30)
     elif dataset_name == "kalgoorlie_fewshot":
         return _get_coco_fewshot_instances_meta(categories=KALGOORLIE_CATEGORIES,
-                novel_categories=KALGOORLIE_NOVEL_CATEGORIES, nthings=30)
+                novel_categories=KALGOORLIE_NOVEL_CATEGORIES, nthings=27)
     elif dataset_name == "lvis_v0.5":
         return _get_lvis_instances_meta_v0_5()
     elif dataset_name == "lvis_v0.5_fewshot":

@@ -202,7 +202,7 @@ if __name__ == '__main__':
             args.coco = True
             categories = KALGOORLIE_CATEGORIES
             novel_categories = KALGOORLIE_NOVEL_CATEGORIES
-            TAR_SIZE = 30
+            TAR_SIZE = 27
         else:
             assert False, 'Unknown dataset'
         # COCO
