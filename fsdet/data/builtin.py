@@ -173,15 +173,6 @@ def register_all_kalgoorlie(root="datasets"):
     # COCO annotations
     METASPLITS = [
         (
-            "kalgoorlie_train",
-            "Kalgoorlie_2019/images_tiled",
-            "Kalgoorlie_2019/kalgoorlie_2019_train.json",
-        ),
-        (
-            "kalgoorlie_test",
-            "Kalgoorlie_2019/images_tiled",
-            "Kalgoorlie_2019/kalgoorlie_2019_test.json",
-        ),        (
             "kalgoorlie_trainval_all",
             "Kalgoorlie_2019/images_tiled",
             "kalgoorliesplit1/datasplit/trainval.json",
