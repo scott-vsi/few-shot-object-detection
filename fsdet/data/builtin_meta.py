@@ -255,6 +255,10 @@ COCO_NOVEL_CATEGORIES = [
 # by filtering this list to the things
 # see also https://github.com/ucbdrive/few-shot-object-detection/issues/90 for
 # an overview of how the all (things), base and novel datasets are generated
+#
+# TODO switch over to chuquisplit1 in builtin.py:register_all_chuqui, which
+# removes the "unknown" sub-classes (e.g., Engineering Vehicle) like I did
+# for kalgoorlie
 CHUQUI_CATEGORIES = [
     {"color": [11, 131, 35], "isthing": 1, "id": 1, "name": "Engineering Vehicle"},
     {"color": [199, 93, 35], "isthing": 1, "id": 3, "name": "Engineering Vehicle:Blasthole Drill"},
@@ -297,7 +301,8 @@ CHUQUI_NOVEL_CATEGORIES = [
     {"color": [185, 82, 186], "isthing": 1, "id": 54, "name": "Truck:Truck Tractor with Liquid Tank"},
 ]
 
-# REVIEW use the same set of categories as chuqui
+# REVIEW use the full set of 56 superpit categories here and for chuqui (they
+# must all be "things")
 KALGOORLIE_CATEGORIES = [
     {"color": [5, 93, 40], "isthing": 1, "id": 5, "name": "Engineering Vehicle:Crane Truck"},
     {"color": [211, 221, 20], "isthing": 1, "id": 6, "name": "Engineering Vehicle:Drill Jumbo"},
