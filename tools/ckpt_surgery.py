@@ -197,12 +197,12 @@ if __name__ == '__main__':
             args.coco = True
             categories = CHUQUI_CATEGORIES
             novel_categories = CHUQUI_NOVEL_CATEGORIES
-            TAR_SIZE = 30
+            TAR_SIZE = len([c for c in CHUQUI_CATEGORIES if c["isthing"] == 1])
         elif args.dataset_name.lower() == 'kalgoorlie':
             args.coco = True
             categories = KALGOORLIE_CATEGORIES
             novel_categories = KALGOORLIE_NOVEL_CATEGORIES
-            TAR_SIZE = 27
+            TAR_SIZE = len([c for c in KALGOORLIE_CATEGORIES if c["isthing"] == 1])
         else:
             assert False, 'Unknown dataset'
         # COCO
