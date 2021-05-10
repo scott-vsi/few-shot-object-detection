@@ -175,27 +175,27 @@ def register_all_kalgoorlie(root="datasets"):
         (
             "kalgoorlie_trainval_all",
             "Kalgoorlie_2019/images_tiled",
-            "kalgoorliesplit1/datasplit/trainval.json",
+            "kalgoorliesplit2/datasplit/trainval.json",
         ),
         (
             "kalgoorlie_trainval_base",
             "Kalgoorlie_2019/images_tiled",
-            "kalgoorliesplit1/datasplit/trainval.json",
+            "kalgoorliesplit2/datasplit/trainval.json",
         ),
         (
             "kalgoorlie_test_all",
             "Kalgoorlie_2019/images_tiled",
-            "kalgoorliesplit1/datasplit/test.json"
+            "kalgoorliesplit2/datasplit/test.json"
         ),
         (
             "kalgoorlie_test_base",
             "Kalgoorlie_2019/images_tiled",
-            "kalgoorliesplit1/datasplit/test.json"
+            "kalgoorliesplit2/datasplit/test.json"
         ),
         (
             "kalgoorlie_test_novel",
             "Kalgoorlie_2019/images_tiled",
-            "kalgoorliesplit1/datasplit/test.json"
+            "kalgoorliesplit2/datasplit/test.json"
         ),
     ]
 
@@ -211,7 +211,7 @@ def register_all_kalgoorlie(root="datasets"):
             _get_builtin_metadata("kalgoorlie_fewshot"),
             os.path.join(root, imgdir),
             os.path.join(root, annofile),
-            split_dir=os.path.join("datasets", "kalgoorliesplit1")
+            split_dir=os.path.join("datasets", "kalgoorliesplit2")
         )
 
 # ==== Predefined datasets and splits for LVIS ==========

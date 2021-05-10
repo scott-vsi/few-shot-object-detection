@@ -33,6 +33,7 @@ datasets/chuquisplit1
 datasets/Kalgoorlie_2019
 datasets/kalgoorliesplit
 datasets/kalgoorliesplit1
+datasets/kalgoorliesplit2
 datasets/*/seed*
 
 # configs
