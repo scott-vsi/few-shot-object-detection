@@ -29,6 +29,8 @@ from detectron2.data import (
     MetadataCatalog,
     build_detection_test_loader,
     build_detection_train_loader,
+    DatasetMapper,
+    detection_utils,
 )
 from detectron2.engine import hooks, SimpleTrainer
 from detectron2.solver import build_lr_scheduler, build_optimizer
@@ -490,7 +492,26 @@ class DefaultTrainer(SimpleTrainer):
         It now calls :func:`fsdet.data.build_detection_train_loader`.
         Overwrite it if you'd like a different data loader.
         """
-        return build_detection_train_loader(cfg)
+        # Create a mapper with a custom transform_list because the one created
+        # in detectron2.data.build_detection_train_loader [1] includes a
+        # ResizeShortestEdge transform [2] configured to a list of values by
+        # configs/Base-RCNN-FPN.yaml:INPUT.MIN_SIZE_TRAIN that (presumably)
+        # work well for imagenet. However, resizing the imagery will change the
+        # GSD of our imagery, which we don't want.
+        # We could set INPUT.MIN_SIZE_TRAIN to a range, say (960, 1024) and set
+        # INPUT.MIN_SIZE_TRAIN_SAMPLING: 'range' and INPUT.MIN_SIZE_TEST: 0 [3]
+        # but what we really want is to resize all of the images such that they
+        # have the same GSD (and then possibly add scale-jittering)
+        # NOTE create a mapper in build_test_loader too
+        #
+        # [1] https://github.com/facebookresearch/detectron2/blob/v0.2.1/detectron2/data/dataset_mapper.py#L86
+        # [2] https://github.com/facebookresearch/detectron2/blob/v0.2.1/detectron2/data/detection_utils.py#L579
+        # [3] https://github.com/facebookresearch/detectron2/blob/v0.2.1/detectron2/config/defaults.py#L56
+
+        transfrom_list = [T.RandomFlip()]
+
+        mapper = DatasetMapper(cfg, True, augmentations=transfrom_list)
+        return build_detection_train_loader(cfg, mapper)
 
     @classmethod
     def build_test_loader(cls, cfg, dataset_name):
@@ -501,7 +522,10 @@ class DefaultTrainer(SimpleTrainer):
         It now calls :func:`fsdet.data.build_detection_test_loader`.
         Overwrite it if you'd like a different data loader.
         """
-        return build_detection_test_loader(cfg, dataset_name)
+
+        # See build_train_loader
+        mapper = DatasetMapper(cfg, False, augmentations=[])
+        return build_detection_test_loader(cfg, dataset_name, mapper)
 
     @classmethod
     def build_evaluator(cls, cfg, dataset_name):
