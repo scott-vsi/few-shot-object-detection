@@ -10,6 +10,7 @@ import argparse
 import logging
 import os
 from collections import OrderedDict
+from PIL import Image
 import torch
 from fvcore.common.file_io import PathManager
 from fvcore.nn.precise_bn import get_bn_modules
@@ -508,7 +509,8 @@ class DefaultTrainer(SimpleTrainer):
         # [2] https://github.com/facebookresearch/detectron2/blob/v0.2.1/detectron2/data/detection_utils.py#L579
         # [3] https://github.com/facebookresearch/detectron2/blob/v0.2.1/detectron2/config/defaults.py#L56
 
-        transfrom_list = [T.RandomFlip()]
+        transfrom_list = [T.RandomFlip(),
+                          T.RandomRotation(angle=(0,360), interp=Image.BILINEAR)]
 
         mapper = DatasetMapper(cfg, True, augmentations=transfrom_list)
         return build_detection_train_loader(cfg, mapper)
