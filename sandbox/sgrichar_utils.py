@@ -14,6 +14,8 @@ import torch
 def match_gt(detections, annotations, iou_thresh=0.0, convert_to_json_ids=True):
     # detections - predicted detections
     # annotations - ground-truth annotations
+    #
+    # NOTE category labels are ignored in proposal scoring
 
     gt_boxes = [
             BoxMode.convert(obj["bbox"], BoxMode.XYWH_ABS, BoxMode.XYXY_ABS)
@@ -54,6 +56,20 @@ def match_gt(detections, annotations, iou_thresh=0.0, convert_to_json_ids=True):
         best_matches_gt[m] = box_ind # set the best matching box at box_ind for ground truth m
         best_matches_dt[box_ind] = m # set ground truth m for the box at box_ind
 
+    # overlaps - [len(detections), len(annotations)] np.array
+    # matches - [detections[j] for j in matches[i]] are the possible confusers
+    #           for annotation[i]; can be []
+    # len(matches) == len(annotations)
+    # best_matches_gt - annotation[i] matches detections[best_matches_gt[i]] if
+    #                   best_matches_gt != -1
+    #                   NOTE the best match for an annotation can be a detection
+    #                   from a different category...
+    # len(best_matches_gt) == len(annotations)
+    # best_matches_dt - detections[i] matches annotations[best_matches_dt[i]]
+    #                   if best_matches_dt != -1
+    #                   NOTE the best match for a detection can be an annotation
+    #                   from a different category...
+    # len(best_matches_dt) == len(detections)
     return overlaps, matches, best_matches_gt, best_matches_dt
 
 
