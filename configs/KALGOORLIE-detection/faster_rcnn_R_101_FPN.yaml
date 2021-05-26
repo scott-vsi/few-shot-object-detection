@@ -17,4 +17,6 @@ SOLVER:
   STEPS: (11954, 15525)
   MAX_ITER: 16875
   BASE_LR: 0.00125
+# NOTE INPUT.[MIN|MAX]_SIZE_TRAIN/[MIN|MAX]_SIZE_TEST have been disabled in
+# fsdet/engine/defaults.py:DefaultTrainer:build_train_loader
 OUTPUT_DIR: "checkpoints/kalgoorlie/faster_rcnn/faster_rcnn_R_101_FPN"

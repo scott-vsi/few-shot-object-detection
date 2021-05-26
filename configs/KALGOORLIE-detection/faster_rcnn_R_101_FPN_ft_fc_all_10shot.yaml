@@ -22,4 +22,6 @@ SOLVER:
   MAX_ITER: 54000
   CHECKPOINT_PERIOD: 10000
   WARMUP_ITERS: 10
+# NOTE INPUT.[MIN|MAX]_SIZE_TRAIN/[MIN|MAX]_SIZE_TEST have been disabled in
+# fsdet/engine/defaults.py:DefaultTrainer:build_train_loader
 OUTPUT_DIR: "checkpoints/kalgoorlie/faster_rcnn/faster_rcnn_R_101_FPN_ft_fc_all_10shot"
