@@ -494,6 +494,7 @@ class DefaultTrainer(SimpleTrainer):
         It now calls :func:`fsdet.data.build_detection_train_loader`.
         Overwrite it if you'd like a different data loader.
         """
+
         # Create a mapper with a custom transform_list because the one created
         # in detectron2.data.build_detection_train_loader [1] includes a
         # ResizeShortestEdge transform [2] configured to a list of values by
