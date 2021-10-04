@@ -1,3 +1,4 @@
+# SEE https://detectron2.readthedocs.io/en/latest/modules/config.html#config-references
 VERSION: 2
 MODEL:
   META_ARCHITECTURE: "GeneralizedRCNN"
