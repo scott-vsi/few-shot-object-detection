@@ -201,10 +201,9 @@ def register_all_kalgoorlie(root="datasets"):
 
     # register small meta datasets for fine-tuning stage
     for prefix in ["all", "novel"]:
-        for shot in [4]:
+        for shot in [1, 2, 5, 10]:
             name = "kalgoorlie_trainval_{}_{}shot".format(prefix, shot)
-            METASPLITS.append((name, "hamadan/digitalglobe/"
-                    "20160817-072146-GE01-M1BS-1050010005C89000-055799368010_01_P002", ""))
+            METASPLITS.append((name, "Kalgoorlie_2019/images_tiled", ""))
 
     for name, imgdir, annofile in METASPLITS:
         register_meta_coco(
