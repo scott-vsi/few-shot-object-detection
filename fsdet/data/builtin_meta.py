@@ -334,11 +334,7 @@ KALGOORLIE_CATEGORIES = [
 ]
 
 KALGOORLIE_NOVEL_CATEGORIES = [
-    {"color": [184, 208, 204], "isthing": 1, "id": 5, "name": "Engineering Vehicle:Crane Truck"},
-    {"color": [85, 226, 194], "isthing": 1, "id": 14, "name": "Engineering Vehicle:Large Haul Truck"},
-    {"color": [214, 92, 56], "isthing": 1, "id": 15, "name": "Engineering Vehicle:Large Loader"},
-    {"color": [212, 61, 57], "isthing": 1, "id": 17, "name": "Engineering Vehicle:Low Haul Truck"},
-    {"color": [48, 0, 133], "isthing": 1, "id": 23, "name": "Engineering Vehicle:Small Haul Truck"},
+    {"color": [184, 208, 204], "isthing": 1, "id": 5, "name": "Aircraft"}
 ]
 
 # PASCAL VOC categories
