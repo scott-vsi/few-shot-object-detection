@@ -11,11 +11,10 @@ import torch
 # https://bitbucket.org/visionsystemsinc/geogenx/src/e07cb38be109a2b0831baff0c47f74e9a8a88206/ \
 #              internal/python/geogenx/eval_utils.py
 # see also https://github.com/cocodataset/cocoapi/blob/8c9bcc3cf640524c4c20a9c40e89cb6a2f2fa0e9/PythonAPI/pycocotools/cocoeval.py
-def match_gt(detections, annotations, iou_thresh=0.0, convert_to_json_ids=True):
+def match_gt(detections, annotations, iou_thresh=0.0, convert_to_json_ids=True,
+        use_categories=False, verbose=False):
     # detections - predicted detections
     # annotations - ground-truth annotations
-    #
-    # NOTE category labels are ignored in proposal scoring
 
     gt_boxes = [
             BoxMode.convert(obj["bbox"], BoxMode.XYWH_ABS, BoxMode.XYXY_ABS)
@@ -53,8 +52,13 @@ def match_gt(detections, annotations, iou_thresh=0.0, convert_to_json_ids=True):
                 m = gt_ind
         if m == -1: # no match with any ground truth for this box
             continue
-        best_matches_gt[m] = box_ind # set the best matching box at box_ind for ground truth m
-        best_matches_dt[box_ind] = m # set ground truth m for the box at box_ind
+        # FIXME this is cheating because now this annotation is available to be
+        # matched to another detection. I should check this when creating the
+        # figures
+        if not use_categories or \
+                annotations[m]['category_id'] == detections[box_ind]['category_id']:
+            best_matches_gt[m] = box_ind # set the best matching box at box_ind for ground truth m
+            best_matches_dt[box_ind] = m # set ground truth m for the box at box_ind
 
     # overlaps - [len(detections), len(annotations)] np.array
     # matches - [detections[j] for j in matches[i]] are the possible confusers
